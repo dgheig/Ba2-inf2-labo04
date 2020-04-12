@@ -1,0 +1,12 @@
+*.exe
+*.o
+builds/*
+doc/doxy/*
+nbproject
+obj
+bin/*
+lib*
+cmake/*
+.vscode
+labo_04_carvalho_bruno_gallay_david
+Makefile
