@@ -15,12 +15,15 @@ Compiler    : g++ 7.4.0
 #ifndef TEMPS_H
 #define TEMPS_H
 #include <iostream>
+#include <string>
 
 template <typename T>
 class Temps {
     public:
         //Constructeurs
         Temps(T heure, T minute, T seconde);
+        template<typename U>
+        Temps(const Temps<U>& t);
         Temps(const Temps& t);
         Temps(T seconde);
 
@@ -28,6 +31,10 @@ class Temps {
         T getHeure() const;
         T getMinute() const;
         T getSeconde() const;
+
+        T asHeure() const;
+        T asMinute() const;
+        T asSeconde() const;
 
         std::ostream& print(std::ostream& stream=std::cout) const;
 
@@ -40,10 +47,23 @@ class Temps {
         Temps& operator=(const Temps& t);
         bool operator==(const Temps& t) const;
         bool operator!=(const Temps& t) const;
+        
         Temps& operator+=(const Temps& t);
         Temps& operator-=(const Temps& t);
 
+        template<typename U>
+        Temps<T>& operator+=(const Temps<U>& t);
+        template<typename U>
+        Temps<T>& operator-=(const Temps<U>& t);
+
         //Castings
+        // template<typename U>
+        // operator U() const;
+
+        operator float() const;
+        operator double() const;
+        operator long long() const;
+        operator std::string() const;
 
     private:
         T _heure;
@@ -52,18 +72,11 @@ class Temps {
 };
 
 
-// template <typename T1, typename T2, typename R>
-// Temps<R> operator+(Temps<T1> t1, const Temps<T2>& t2);
+template <typename T1, typename T2>
+Temps<T1> operator+(Temps<T1> t1, const Temps<T2>& t2);
 
-template <typename T>
-Temps<T> operator+(Temps<T> t1, const Temps<T>& t2);
-
-// template <typename T1, typename T2, typename R>
-// Temps<R> operator-(Temps<T1> t1, const Temps<T2>& t2);
-
-template <typename T>
-Temps<T> operator-(Temps<T> t1, const Temps<T>& t2);
-
+template <typename T1, typename T2>
+Temps<T1> operator-(Temps<T1> t1, const Temps<T2>& t2);
 
 template <typename T>
 std::ostream& operator<<(std::ostream& stream, Temps<T> temps);
