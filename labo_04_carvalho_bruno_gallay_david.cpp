@@ -13,13 +13,16 @@ Compiler    : MinGW-g++ 6.3.0 and g++ 7.4.0
 -----------------------------------------------------------------------------------*/
 #include <iostream>
 #include <cstdlib>
-#include "src/Temps.h"
+#include "src/temps.h"
 
 using namespace std;
 
 #define WAIT_ENTER while(cin.get()!='\n')
 
 int main() {
+    Temps<int> t(0, 0, 0);
+
+    std::cout << t << std::endl;
 
     cout << "Please, press <ENTER> to end the program" << endl;
     WAIT_ENTER;

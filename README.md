@@ -9,7 +9,10 @@
 
 English
 
-## Naming Conventions
+## Files Naming Conventions
+* templates definitions: .ipp (CPPGuide)[http://web.mst.edu/~cpp/common/CPPguides_list.html]
+
+## Code Naming Conventions
 
 * Variables: camelCase
 * Functions: camelCase
