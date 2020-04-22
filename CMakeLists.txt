@@ -19,6 +19,6 @@ endif()
 add_executable(
     labo_04_carvalho_bruno_gallay_david
     labo_04_carvalho_bruno_gallay_david.cpp
-)
+        src/Temps.cpp src/Temps.h)
 
 # add_executable(testDiffDate tests/testDiffDate.cpp src/date.cpp src/date.h)

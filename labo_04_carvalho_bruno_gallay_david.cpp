@@ -13,7 +13,7 @@ Compiler    : MinGW-g++ 6.3.0 and g++ 7.4.0
 -----------------------------------------------------------------------------------*/
 #include <iostream>
 #include <cstdlib>
-#include "Temps.h"
+#include "src/Temps.h"
 
 using namespace std;
 
