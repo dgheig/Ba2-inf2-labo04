@@ -20,14 +20,15 @@ Compiler    : g++ 7.4.0
 template <typename T>
 class Temps {
     public:
-        //Constructeurs
+        // Constructeurs
+        Temps();
         Temps(T heure, T minute, T seconde);
         template<typename U>
-        Temps(const Temps<U>& t);
-        Temps(const Temps& t);
+        Temps(const Temps<U>& temps);
+        Temps(const Temps& temps);
         Temps(T seconde);
 
-        //Getters
+        // Getters
         T getHeure() const;
         T getMinute() const;
         T getSeconde() const;
@@ -38,34 +39,40 @@ class Temps {
 
         std::ostream& print(std::ostream& stream=std::cout) const;
 
-        //Setters
+        // Setters
         void setHeure(T heure);
         void setMinute(T minute);
         void setSeconde(T seconde);
 
-        //Operators
-        Temps& operator=(const Temps& t);
-        bool operator==(const Temps& t) const;
-        bool operator!=(const Temps& t) const;
+        // Operators
+        template<typename U>
+        Temps& operator=(const Temps<U>& temps);
+        Temps& operator=(const Temps& temps);
         
-        Temps& operator+=(const Temps& t);
-        Temps& operator-=(const Temps& t);
+        Temps& operator+=(const Temps& temps);
+        Temps& operator-=(const Temps& temps);
 
         template<typename U>
-        Temps<T>& operator+=(const Temps<U>& t);
+        Temps& operator+=(const Temps<U>& temps);
         template<typename U>
-        Temps<T>& operator-=(const Temps<U>& t);
+        Temps& operator-=(const Temps<U>& temps);
 
-        //Castings
+        bool operator==(const Temps& temps) const;
+        bool operator!=(const Temps& temps) const;
+
+        // Castings
         // template<typename U>
         // operator U() const;
 
         operator float() const;
         operator double() const;
+        operator long double() const;
         operator long long() const;
         operator std::string() const;
 
     private:
+        static T toSeconde(T heure, T minute, T seconde);
+        void fromSeconde(T seconde);
         T _heure;
         T _minute;
         T _seconde;
