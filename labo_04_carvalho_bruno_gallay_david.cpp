@@ -14,6 +14,7 @@ Compiler    : MinGW-g++ 6.3.0 and g++ 7.4.0
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <stdexcept>
 #include "src/temps.h"
 
 using namespace std;
@@ -38,6 +39,11 @@ int main() {
     std::cout << (double)t3 << std::endl;
     std::cout << (long long)t3 << std::endl;
     std::cout << std::string(t3) << std::endl;
+    try {
+        t2 - t3;
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 
     cout << "Please, press <ENTER> to end the program" << endl;
     WAIT_ENTER;

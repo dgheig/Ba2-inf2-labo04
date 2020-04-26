@@ -20,7 +20,8 @@ Compiler    : g++ 7.4.0
 #define SEC_IN_H (SEC_IN_MIN * MIN_IN_H)
 
 #include <sstream>
-#include <stdexcept>
+#include "exceptions.h"
+
 //Constructeurs
 
 template<typename T>
@@ -54,10 +55,10 @@ Temps<T>::Temps(T seconde) {
 template <typename T>
 void Temps<T>::fromSeconde(T seconde) {
     if (seconde < 0)
-        throw std::invalid_argument("La classe Temps ne peut avoir une valeur negative");
-    _heure = (int)(seconde / SEC_IN_H);
+        throw negative_value("La classe Temps ne peut avoir une valeur negative");
+    _heure = (T)(int)(seconde / SEC_IN_H);
     seconde -= _heure * SEC_IN_H;
-    _minute = (int)(seconde / SEC_IN_MIN);
+    _minute = (T)(int)(seconde / SEC_IN_MIN);
     seconde -= _minute * SEC_IN_MIN;
     _seconde = seconde;
 }
@@ -106,21 +107,21 @@ std::ostream& Temps<T>::print(std::ostream& stream) const {
 template<typename T>
 void Temps<T>::setHeure(T heure) {
     if (heure < 0)
-        throw std::invalid_argument("La classe Temps ne peut avoir d'heures negatives");
+        throw negative_value("La classe Temps ne peut avoir d'heures negatives");
     _heure = heure;
 }
 
 template<typename T>
 void Temps<T>::setMinute(T minute) {
     if (minute < 0 or MIN_IN_H <= minute)
-        throw std::invalid_argument("Les minutes doivent etre entre 0 et 59");
+        throw negative_value("Les minutes doivent etre entre 0 et 59");
     _minute = minute;
 }
 
 template<typename T>
 void Temps<T>::setSeconde(T seconde) {
     if (seconde < 0 or SEC_IN_MIN <= seconde)
-        throw std::invalid_argument("Les secondes doivent etre entre 0 et 59");
+        throw negative_value("Les secondes doivent etre entre 0 et 59");
     _seconde = seconde;
 }
 
@@ -218,7 +219,7 @@ Temps<T>::operator double() const {
 
 template<typename T>
 Temps<T>::operator long double() const {
-    Temps<long double>(*this).asHeure();
+    return Temps<long double>(*this).asHeure();
 }
 
 template<typename T>

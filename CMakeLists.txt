@@ -20,6 +20,7 @@ add_executable(
     labo_04_carvalho_bruno_gallay_david
     labo_04_carvalho_bruno_gallay_david.cpp
     src/temps.ipp src/temps.h
+    src/exceptions.h
 )
 
 # add_executable(testDiffDate tests/testDiffDate.cpp src/date.cpp src/date.h)
