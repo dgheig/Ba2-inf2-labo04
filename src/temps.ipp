@@ -198,15 +198,6 @@ std::ostream& operator<<(std::ostream& stream, Temps<T> temps) {
     return temps.print(stream);
 }
 
-
-//Castings
-// template<typename T>
-// template<typename U>
-// Temps<T>::operator U() const {
-//     return asHeure();
-// }
-
-
 template<typename T>
 Temps<T>::operator float() const {
     return Temps<float>(*this).asHeure();
