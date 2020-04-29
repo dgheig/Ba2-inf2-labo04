@@ -5,9 +5,10 @@ File        : temps.ipp
 Author(s)   : Carvalho Bruno et Gallay David
 Date        : 
 
-Purpose     : 
+Purpose     : Defining function Temps
 Remark(s)   :
                 There is the github repository:
+                https://github.com/dgheig/Ba2-inf2-labo04
 
 Compiler    : g++ 7.4.0
 -----------------------------------------------------------------------------------*/
@@ -22,14 +23,10 @@ Compiler    : g++ 7.4.0
 #include <sstream>
 #include "exceptions.h"
 
-//Constructeurs
+// Constructors
 
 template<typename T>
-Temps<T>::Temps(): _heure(0), _minute(0), _seconde(0) {
-}
-
-template<typename T>
-Temps<T>::Temps(T heure, T minute, T seconde): Temps() {
+Temps<T>::Temps(T heure, T minute, T seconde): _heure(0), _minute(0), _seconde(0) {
     // Let the user enter negative parameter
     // as long as the resulting time is positive
     fromSeconde(toSeconde(heure, minute, seconde));
@@ -48,7 +45,7 @@ Temps<T>::Temps(const Temps<T>& temps): Temps() {
 }
 
 template <typename T>
-Temps<T>::Temps(T seconde) {
+Temps<T>::Temps(T seconde): Temps() {
     fromSeconde(seconde);
 }
 
@@ -114,14 +111,14 @@ void Temps<T>::setHeure(T heure) {
 template<typename T>
 void Temps<T>::setMinute(T minute) {
     if (minute < 0 or MIN_IN_H <= minute)
-        throw negative_value("Les minutes doivent etre entre 0 et 59");
+        throw std::invalid_argument("Les minutes doivent etre entre 0 et 59");
     _minute = minute;
 }
 
 template<typename T>
 void Temps<T>::setSeconde(T seconde) {
     if (seconde < 0 or SEC_IN_MIN <= seconde)
-        throw negative_value("Les secondes doivent etre entre 0 et 59");
+        throw std::invalid_argument("Les secondes doivent etre entre 0 et 59");
     _seconde = seconde;
 }
 
@@ -191,6 +188,15 @@ Temps<T1> operator+(Temps<T1> temps1, const Temps<T2>& temps2) {
 template <typename T1, typename T2>
 Temps<T1> operator-(Temps<T1> temps1, const Temps<T2>& temps2) {
     return temps1 -= temps2;
+}
+
+template <typename T1, typename T2>
+Temps<T1> operator<(Temps<T1> t1, const Temps<T2>& t2) {
+    return t1.asSeconde() < t2.asSeconde();
+}
+template <typename T1, typename T2>
+Temps<T1> operator>(Temps<T1> t1, const Temps<T2>& t2) {
+    return t2 < t1;
 }
 
 template<typename T>
